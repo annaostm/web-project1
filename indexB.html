@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Prosjekt 1</title>
+    <link type="text/css" rel="stylesheet" href="main.css" />
+    <script type="text/javascript" src="https://code.jquery.com/jquery-latest.min.js"> </script>
+    <script type="text/javascript" src="js.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Om kunstneren</h1>
+        </div>
+
+        <div class="about">
+            <div class="photo">
+                <img id="EM" src="Edvard_Munch.png">
+            </div>
+
+            <div class="infosection">
+                <p></p>
+                <p1>Edvard Munch, kunstneren, ble født i 1851 og døde i 1902. Gjennom karrieren ble
+                    han mest kjent for maleriene sine. På fritiden likte han å animere SVG-
+                    og Canvas-filer.
+                    Se hva som skjer hvis du trykker på gresset eller se om du klarer å finne en gjemt elv i gresset.
+                </p1>
+            </div>
+        </div>
+
+        <div class="svgContainer">
+            <div class="svgTitle">
+                <h4>SVG</h4>
+            </div>
+            <svg class="svg" width="370px" height="370px">
+                <rect id="sky" width="370" height="370" />
+                <rect id="ground" y="296" width="370" height="78" />
+                <rect id="river" y="340" width="370" height="21" />
+
+                <g class="stars">
+                    <path id="star1"
+                        d="M80.5 14L85.7761 29.2016H102.85L89.0369 38.5967L94.313 53.7984L80.5 44.4033L66.687 53.7984L71.9631 38.5967L58.1502 29.2016H75.2239L80.5 14Z" />
+                </g>
+
+                <g class="mountains">
+                    <path id="bigMountain" d="M120.5 166L216 307H25L120.5 166Z" />
+                    <path id="littleMountain" d="M246 246L312.684 340.5H179.316L246 246Z" />
+                </g>
+                <circle id="moon" r="32">
+                    <!-- Animasjon for svg -->
+                    <animateMotion dur="9s" repeatCount="indefinite"
+                        path="M 185 32 L 260.731 90.0779 L 338 147 L 260.731 203.922 L 185 262 L 109.269 203.922 L 32 147 L 109.269 90.0779 L 185 32 Z" />
+                </circle>
+            </svg>
+        </div>
+
+        <div class="canvasContainer">
+            <div class="canvasTitle">
+                <h4>Canvas</h4>
+            </div>
+            <canvas id="canvas" width="370px" height="370px"></canvas>
+        </div>
+
+
+        <div class="dropdown">
+
+            <div id="docButton"><button id="docB">Dokumentasjon</button></div>
+            <div id="documentation">
+                <p id="doc-text">
+                <p></p>
+                <b>CSS-grid og Flexbox</b>
+                <p>
+                    Jeg har lagd en grid ved å legge alle elementene i html-filen i en container, og deretter definere grid-kolonner og -rader for denne containeren i CSS-filen. Ut i fra layout-en jeg ville ha satte jeg opp 6 like store kolonner, mens radene ble automatisk kalkulert. Dette var fordi jeg ville ha bildet av Munch på en viss plass på skjermen, i tillegg til SVG og canvas i lik størrelse på samme rad. Hvis du høyreklikker på skjermen, trykker "Inspect", og velger div.container på "Grid overlays" på Layout i inspect-vinduet, ser du griden, og hvor elementene er plassert i den. For at den skal være responsiv for små vinduer eller skjermer har jeg brukt @media for å definere hvordan griden skal endres når vinduet blir mindre.
+Jeg valgte å bruke CSS-grid ettersom jeg ville ha et todimensjonalt design med fleksibilitet rundt plasseringen av elementene. I akkurat dette prosjektet hadde nok bruk av flexbox holdt for layout-en jeg valgte, og siden det er såpass på elementer. Men, det virker som en veldig nyttig kunnskap videre, gitt variasjonen og valgfriheten man får når man skal sette opp en layout. Dessuten kan man sette displayet til grid-elementene til å være flex, slik at man uansett får et fleksibelt design.
+   
+                </p>
+
+                <b>Canvas og SVG i HTML</b>
+                <p>
+                    SVG og Canvas er begge gode verktøy til å tegne grafikk, implementere interaktivitet og animasjoner. Jeg har prøvd å lage mest mulig like bilder ved hjelp av begge, men lært mye om hvor forskjellig det implementeres. 
+Etter å ha satt meg litt inn i og prøvd meg fram med manuell koding av SVG-elementer, valgte jeg å bruke tegneverktøyet Figma til å tegne opp motivet, og eksportere det som SVG.
+Koden for elementene skrives og legges rett inn i HTML-filen. SVG er et språk som beskriver grafiske elementer, og siden de defineres, er det lett å referere til dem, sånn at de kan styles og endres gjennom CSS og Scripts. Siden det er basert på vektorer kan det lett skaleres. Dette merket jeg på at det var relativt lett å skalere SVG-en uten at konsekvensene av interaktivitet ble påvirket. Siden alle elementene er definert var det lett å implementere interaktivitet. Jeg brukte en del jQuery-metoder til dette. Til animasjonen brukte jeg <animateMotion>, et SVG-element som lar et element bevege seg langs en viss path.
+Canvas i HTML er en container for grafikk, som tegner grafikken fortløpende ved oppdatering, animasjon eller interaktivitet. Det er ikke like lett skalerbart, ettersom den tegner ut i fra oppgitte pixel heller enn vektorer. Man kan bare tegne/endre canvaset ved Scripts, så all tegning av grafikk er i javascript-filen. Jeg lagde alle elementene fra SVG-bildet ved å tegne paths, fylle rektangler med farge eller tegne ellipse(). For animasjon blir elementene som er i bevegelse eller i bakgrunnen av animasjonen slettet og tegnes på nytt, nå med det utvalgte elementet i en annen posisjon. Interaktivitet i canvas var mye vanskeligere enn for SVG, ettersom elementene ikke er definert, og man må tegne hele elementet på nytt dersom en egenskap skal endres, i tillegg til at canvaset i utgangspunktet kun vet om musen til brukeren er på selve canvascontaineren, og ikke elementene, og dermed selv finne metoder for å finne musens posisjon i forhold til elementets posisjon for å få interaksjon på elementnivå.
+                </p>
+
+                <b>Filorganisering</b>
+                <p>
+                    Jeg har valgt å organisere filene mine i én CSS-fil, én javascript-fil, og én html-fil. Inline-CSS hadde vært en god mulighet her, ettersom det kun skulle vises på én page, altså skulle stylingen uansett ikke gjenbrukes i andre pages, og browseren kunne prosessert dette raskere, da den får én mindre fil å laste inn. Likevel synes jeg styling i en egen fil er litt mer ryddig og mer nyttig å øve seg på for fremtidige prosjekter, som sannsynligvis blir større prosjekter. 
+Av samme grunn lagde jeg en eget javascript-fil i stedet for å bruke script-tags i html-dokumentet. 
+
+                </p>
+
+                <b>jQuery</b>
+                <p>
+                    jQuery er et javascriptbibliotek som ofte er nyttig når HTML-dokumentet skal modifiseres, håndteres, etc. Jeg importerte det inn i HTML-filen min og har brukt en del jQuery-funksjoner i js-filen min for å sjekke at hele hele dokumentet er lastet inn før kode kjøres og kode interaktivitet for elementene i SVG. Jeg brukte ikke jQuery da jeg tegnet grafikken, kodet interaktivitet eller animasjon i canvas, fordi elementene i canvascontaineren ikke er eksplisitt definert. Hvis jeg hadde brukt jQuery på hele canvas-containeren hadde det kunne brukes, men ikke på elementnivå innad i canvaset.
+                </p>
+
+                <b>Cross-browser-testing</b>
+                <p>
+                    Jeg utførte cross-browser-testing for å teste om nettsidens funksjonalitet, design og responsivitet fungerer slik den skal når man kjørte den i forskjellige browsere, devicetyper, etc. Jeg brukte hovedsakelig Chrome underveis i utviklingen, men mot slutten testet jeg i Chrome, Safari og Firefox. Jeg brukte Safari sin "Responsive Design Mode" (kan velges i "Develop"-menyen man kan aktivere) for å se at den fungerte på forskjellige skjermstørrelser i forskjellige nettlesere. Jeg satte først størrelsen til både SVG og canvaset til å skaleres etter størrelsen på vinduet, men dette gjorde interaktivteten til canvaset litt ustabil, i tillegg til at det føltes unaturlig at bildene endret størrelse i forhold til de andre elementene når de uansett i følge oppgaven hovedsakelig skulle passe PC-skjermer. Dette ville jeg ikke lagt merke til uten å bruke Responsive Design Mode.
+                </p>
+
+                <b>Informasjonskilder</b>
+                <p>
+                    Jeg har søkt mye på nettet, sett gjennom lignende spørsmål på forumer, som StackOverflow og fagets piazzaside. Jeg har også lest en del w3schools, og sett en del tutorials på YouTube. 
+                    <ul>
+                        <li><a href="https://www.w3schools.com/">https://www.w3schools.com/</a></li>
+                        <li><a href="https://developer.mozilla.org/en-US/">https://developer.mozilla.org/en-US/</a></li>
+                        <li>En turtorial for grid:<a href="https://www.youtube.com/watch?v=t6CBKf8K_Ac&t=1590s">hhttps://www.youtube.com/watch?v=t6CBKf8K_Ac&t=1590s</a></li>
+                        <li>En turtorial for canvas:<a href="https://www.youtube.com/watch?v=3GqUM4mEYKA&t=978s">https://www.youtube.com/watch?v=3GqUM4mEYKA&t=978s</a></li>
+                    </ul>
+                </p>
+                </p>
+            </div>
+        </div>
+    </div>
+    </div>
+</body>
+
+</html>
